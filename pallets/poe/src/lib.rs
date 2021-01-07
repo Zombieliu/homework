@@ -14,6 +14,7 @@ mod mock;
 #[cfg(test)]
 mod tests;
 
+
 /// Configure the pallet by specifying the parameters and types on which it depends.
 pub trait Trait: frame_system::Trait {
 	/// Because this pallet emits events, it depends on the runtime's definition of an event.
@@ -153,8 +154,8 @@ decl_module! {
             // Verify that the specified proof has not already been claimed.
             ensure!(!Proofs::<T>::contains_key(&proof), Error::<T>::ProofAlreadyClaimed);
 
-			// check the content legend,if the content legend > 4 return err Exceedsrange
-            ensure!(&proof.len()>&4, Error::<T>::Exceedsrange);
+			// check the content legend,if the content legend > 5 return err Exceedsrange
+            ensure!(&proof.len()<&5, Error::<T>::Exceedsrange);
 
             // Get the block number from the FRAME System module.
             let current_block = <frame_system::Module<T>>::block_number();

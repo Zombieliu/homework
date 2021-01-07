@@ -91,7 +91,11 @@ fn transfer_claim(){
 fn claim_legend(){
     new_test_ext().execute_with(||{
         let proof:Vec<u8> = vec![0,1,2,3,4,5];
-        assert_ok!(PoeModule::create_claim_check_legend(Origin::signed(1),proof.clone()));
+
+        assert_noop!(
+           PoeModule::create_claim_check_legend(Origin::signed(1),proof.clone()),
+           Error::<Test>::Exceedsrange,
+        );
     })
 }
 
